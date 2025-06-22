@@ -1,5 +1,5 @@
 # 📊 SEC Financial Data Warehouse & Visualization Project
-
+BY Anesh Thangaraj
 This project demonstrates an end-to-end pipeline for building a scalable, query-optimized financial data warehouse using PostgreSQL on AWS EC2, based on publicly available U.S. SEC filings. The system supports multi-table joins, ratio analysis, and visual storytelling through interactive Tableau dashboards.
 
 ---
@@ -90,7 +90,4 @@ psql -U postgres -d sec_finance -f sql/load_cleaned_data.sql
 Explore Tableau Dashboards
 Open the .twbx files in Tableau Desktop or Tableau Public to interact with the dashboards.
 
-Anesh Thangaraj
-MS in Business Analytics | George Washington University
-📫 Email
-🌐 LinkedIn
+
