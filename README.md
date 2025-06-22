@@ -15,6 +15,21 @@ This project demonstrates an end-to-end pipeline for building a scalable, query-
 
 ---
 
+## 📚 About the 8 SEC Tables
+
+| Table | Description |
+|-------|-------------|
+| `sub` | Submission metadata – includes basic details like company name, CIK, form type, and filing dates. |
+| `num` | Numeric facts reported in the filing, such as total revenue, net income, assets, etc. |
+| `dim` | Dimensional data that describes the context of numeric facts (e.g., segments, geographic area). |
+| `tag` | Defines what each numeric fact means (e.g., “AssetsCurrent” = current assets). |
+| `pre` | Presentation linkbase – describes how tags are grouped in the presentation of the financial statements. |
+| `cal` | Calculation linkbase – shows how tags mathematically relate (e.g., total assets = liabilities + equity). |
+| `lab` | Label linkbase – provides human-readable labels for tags, often in different languages or roles. |
+| `ren` | Reference linkbase – includes authoritative literature references (e.g., GAAP, IFRS) linked to tags. |
+
+---
+
 ## 🛠️ Project Workflow
 
 ### 1️⃣ Schema Design & Relational Modeling  
@@ -55,17 +70,6 @@ This project demonstrates an end-to-end pipeline for building a scalable, query-
 
 ---
 
-## 📁 Repository Structure
-
-```
-├── sql/                    # SQL scripts for schema, constraints, joins
-├── tableau/                # Tableau workbooks (.twbx)
-├── diagrams/               # ER diagrams (PDF/PNG)
-├── docs/                   # SOPs, data dictionary, metadata
-├── data/                   # Sample cleaned datasets (optional)
-├── LICENSE
-└── README.md
-```
 
 ---
 
@@ -75,39 +79,18 @@ This project demonstrates an end-to-end pipeline for building a scalable, query-
    ```bash
    git clone https://github.com/yourusername/sec-financial-data-warehouse.git
    cd sec-financial-data-warehouse
-   ```
+Set up PostgreSQL on AWS EC2
+Launch an EC2 instance, install PostgreSQL, and execute the schema and data load scripts:
 
-2. **Set up PostgreSQL on AWS EC2**  
-   Launch an EC2 instance, install PostgreSQL, and execute the schema and data load scripts:
-   ```bash
-   psql -U postgres -d sec_finance -f sql/create_schema_with_keys.sql
-   psql -U postgres -d sec_finance -f sql/load_cleaned_data.sql
-   ```
+bash
+Copy
+Edit
+psql -U postgres -d sec_finance -f sql/create_schema_with_keys.sql
+psql -U postgres -d sec_finance -f sql/load_cleaned_data.sql
+Explore Tableau Dashboards
+Open the .twbx files in Tableau Desktop or Tableau Public to interact with the dashboards.
 
-3. **Explore Tableau Dashboards**
-   Open the `.twbx` files in Tableau Desktop or Public to interact with visual insights.
-
----
-
-## 📊 Dashboard Snapshots
-
-You can add screenshots or a video demo here if you’d like:
-- **Filing Frequency Heatmap**
-- **Ratio Trend Timeline**
-- **Disclosure Lag Analyzer**
-
----
-
-## ✅ Impact
-
-- 🚀 Boosted reporting accuracy by **30%**  
-- 🔄 Integrated and standardized **8+ complex datasets**  
-- 📈 Made financial data more accessible to downstream analysts via Tableau
-
----
-
-## 👩‍💻 Author
-
-**Poojaa Saimurali**  
-MS in Business Analytics | George Washington University  
-📫 [Email](mailto:your.email@example.com) | 🌐 [LinkedIn](https://www.linkedin.com/in/your-profile)
+Anesh Thangaraj
+MS in Business Analytics | George Washington University
+📫 Email
+🌐 LinkedIn
