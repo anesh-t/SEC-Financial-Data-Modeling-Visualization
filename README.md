@@ -1,16 +1,29 @@
-# 📊 SEC Financial Data Modeling & Visualization
+# 📊 SEC Financial Statement & Notes Data Warehouse + Visualization Project
+
 BY Anesh Thangaraj
-This project demonstrates an end-to-end pipeline for building a scalable, query-optimized financial data warehouse using PostgreSQL on AWS EC2, based on publicly available U.S. SEC filings. The system supports multi-table joins, ratio analysis, and visual storytelling through interactive Tableau dashboards.
+
+This project focuses on building a scalable, cloud-hosted data warehouse using PostgreSQL on AWS EC2 to store, clean, and analyze the U.S. Securities and Exchange Commission (SEC)'s Financial Statement and Notes Data Sets. It also includes interactive Tableau dashboards for financial disclosure trend analysis across public companies.
+
+---
+
+## 🔗 Source Dataset
+
+- **Data Publisher:** U.S. Securities and Exchange Commission (SEC)
+- **Dataset Name:** Financial Statement and Notes Data Sets
+- **Access:** [SEC.gov Official Dataset Page](https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html)
+- **Direct Download Used in This Project:**  
+  [2024_01_notes.zip](https://www.sec.gov/files/dera/data/financial-statement-notes-data-sets/2024_01_notes.zip)
+- **Date Range Covered:** Data from filings submitted in **January 2024**
 
 ---
 
 ## 🧩 Project Summary
 
-- **Domain:** Financial Data Engineering & Reporting  
+- **Domain:** Financial Reporting & Data Engineering  
 - **Database Engine:** PostgreSQL on AWS EC2  
-- **Data Source:** SEC EDGAR datasets  
-- **Tables Used:** 8+ (e.g., `sub`, `num`, `dim`, `tag`, etc.)  
-- **Rows Processed:** 480,000+  
+- **Data Source:** SEC Financial Statement and Notes Data  
+- **Tables Used:** 8 standard tab-delimited tables  
+- **Records Processed:** 480,000+  
 - **Dashboard Tool:** Tableau (Interactive .twbx dashboards)
 
 ---
@@ -19,42 +32,40 @@ This project demonstrates an end-to-end pipeline for building a scalable, query-
 
 | Table | Description |
 |-------|-------------|
-| `sub` | Submission metadata – includes basic details like company name, CIK, form type, and filing dates. |
-| `num` | Numeric facts reported in the filing, such as total revenue, net income, assets, etc. |
-| `dim` | Dimensional data that describes the context of numeric facts (e.g., segments, geographic area). |
-| `tag` | Defines what each numeric fact means (e.g., “AssetsCurrent” = current assets). |
-| `pre` | Presentation linkbase – describes how tags are grouped in the presentation of the financial statements. |
-| `cal` | Calculation linkbase – shows how tags mathematically relate (e.g., total assets = liabilities + equity). |
-| `lab` | Label linkbase – provides human-readable labels for tags, often in different languages or roles. |
-| `ren` | Reference linkbase – includes authoritative literature references (e.g., GAAP, IFRS) linked to tags. |
+| `sub` | Submission metadata (e.g., accession number, CIK, filer info) |
+| `num` | Numeric financial data, including statement and note-level facts |
+| `txt` | Plain-text financial note disclosures |
+| `tag` | Metadata about each tag (label, data type, taxonomy) |
+| `dim` | Dimensions for contextualizing facts (e.g., segments, geographies) |
+| `pre` | Presentation linkbase (defines order of tags in filings) |
+| `cal` | Calculation relationships (defines roll-up structures) |
+| `ren` | Rendering linkbase (report formatting info) |
 
 ---
 
 ## 🛠️ Project Workflow
 
 ### 1️⃣ Schema Design & Relational Modeling  
-- Created **relational schema** with **primary and foreign key** constraints for all 8+ SEC tables.  
-- Designed and documented **ER diagrams** for cross-table analysis.  
-- Ensured data consistency and referential integrity across all entity relationships.
+- Created **relational schema** with **primary and foreign key** constraints for all 8 tables.  
+- Generated **ER diagrams** to map relationships and support query integrity.
 
 ### 2️⃣ Data Cleaning & Preprocessing  
-- Cleaned and standardized raw SEC data using **PostgreSQL** queries.  
-- Normalized key metrics for compatibility across tables.  
-- Resolved schema mismatches, missing values, and column naming inconsistencies.
+- Handled large flat files (~50MB) using PostgreSQL.  
+- Cleaned and normalized column values for consistency.  
+- Enabled multi-table joins by aligning tag and dimension references.
 
 ### 3️⃣ Data Analysis & Insights  
-- Wrote complex SQL queries for:
-  - **Filing frequency**
-  - **Financial ratio trends**
-  - **Disclosure delays across firms and years**  
-- Enabled multi-dimensional analysis across different filing entities and timeframes.
+- Wrote SQL queries for:
+  - Filing volume by company and industry
+  - Most frequent financial tags
+  - Temporal patterns in note disclosures
+- Linked numeric and text-based facts for context-driven analysis.
 
 ### 4️⃣ Interactive Dashboard in Tableau  
-- Built dynamic Tableau dashboards to:
-  - Visualize filing patterns
-  - Track ratio performance by firm/year
-  - Analyze the timing and content of disclosures  
-- Enhanced user experience with filters, drilldowns, and tooltips.
+- Built Tableau dashboards to:
+  - Analyze filing frequency and tag usage
+  - Explore common disclosures in plain-text notes
+  - Visualize trends across fiscal years and firms
 
 ---
 
@@ -66,28 +77,22 @@ This project demonstrates an end-to-end pipeline for building a scalable, query-
 | Database Engine  | PostgreSQL                  |
 | Query Language   | SQL                         |
 | Data Viz         | Tableau (Public / Desktop)  |
-| Documentation    | ER Diagrams, Metadata Docs  |
+| Documentation    | ER Diagrams, SOPs           |
 
 ---
 
+## 🚀 How to Reproduce
 
----
-
-## 🚀 How to Use
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/sec-financial-data-warehouse.git
-   cd sec-financial-data-warehouse
+1. **Clone the Repository**
+```bash
+git clone https://github.com/yourusername/sec-notes-data-warehouse.git
+cd sec-notes-data-warehouse
 Set up PostgreSQL on AWS EC2
-Launch an EC2 instance, install PostgreSQL, and execute the schema and data load scripts:
 
 bash
 Copy
 Edit
-psql -U postgres -d sec_finance -f sql/create_schema_with_keys.sql
-psql -U postgres -d sec_finance -f sql/load_cleaned_data.sql
-Explore Tableau Dashboards
-Open the .twbx files in Tableau Desktop or Tableau Public to interact with the dashboards.
+psql -U postgres -d sec_notes -f sql/create_schema.sql
+psql -U postgres -d sec_notes -f sql/load_cleaned_data.sql
 
 
