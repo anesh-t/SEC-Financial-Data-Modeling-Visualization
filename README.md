@@ -1,4 +1,4 @@
-# 📊 SEC Financial Data Warehouse & Visualization Project
+# 📊 SEC Financial Data Modeling & Visualization
 BY Anesh Thangaraj
 This project demonstrates an end-to-end pipeline for building a scalable, query-optimized financial data warehouse using PostgreSQL on AWS EC2, based on publicly available U.S. SEC filings. The system supports multi-table joins, ratio analysis, and visual storytelling through interactive Tableau dashboards.
 
